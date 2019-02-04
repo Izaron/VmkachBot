@@ -10,55 +10,12 @@ local inspect = require("inspect")
 -- Project module includies
 local emoji = require("emoji")
 local wolfram = require("wolfram")
+local commands = require("commands")
 
 -- Load the API
 local token = os.getenv("TOKEN")
 local owner = os.getenv("OWNER")
 local api = require("telegram-bot-lua.core").configure(token)
-
--- define the commands
-local commands = {}
-
---------------------------------------------
--- Returns random number in [1..100]
--- @param msg New message (table).
---------------------------------------------
-function commands.random(msg)
-    api.send_message(
-        msg.chat.id,
-        math.random(100)
-    )
-end
-
---------------------------------------------
--- Sends a query to the Wolfram API and returns
--- an image of the result.
--- @param msg New message (table).
---------------------------------------------
-function commands.wolfram(msg)
-    text = msg.text
-
-    -- First symbol is '/'
-    -- Then any number of non-whitespaces
-    -- Then at least one whitespace
-    -- Then one non-whitespace
-    a, b = text:find("/%S*%s%s*%S") -- 'b' now points at first
-                                    -- non-space letter after '/com'
-
-    if b then
-        api.send_document(
-            msg.chat.id,
-            wolfram.build_query(text:sub(b))
-        )
-    end
-end
-
---------------------------------------------
--- Sends a query to the Wolfram API and returns
--- an image of the result.
--- @param msg New message (table).
---------------------------------------------
-commands.wf = commands.wolfram
 
 --------------------------------------------
 -- Handles new message
@@ -75,8 +32,8 @@ function api.on_message(msg)
             -- found a command
             a, b = text:find("/%S*")
             com = text:sub(a + 1, b)
-            if commands[com] then
-                commands[com](msg)
+            if commands.table[com] then
+                commands.table[com](api, msg)
             end
         else
             -- regular message, echo it
