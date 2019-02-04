@@ -4,14 +4,14 @@
 -- =========================================
 
 --[[
-local utf8 = require("lua-utf8")
-local u = utf8.escape
 local stringy = require("stringy")
 ]]--
 local inspect = require("inspect")
+local emoji = require("emoji")
 
 -- Load the API
 local token = os.getenv("TOKEN")
+local owner = os.getenv("OWNER")
 local api = require("telegram-bot-lua.core").configure(token)
 
 function api.on_message(msg)
@@ -33,4 +33,9 @@ function api.on_message(msg)
 end
 
 print("The bot is running")
+api.send_message(
+    owner,
+    "Hi, there is a lemon " .. emoji.emoji_unicode["lemon"]
+)
+
 api.run()
