@@ -3,11 +3,13 @@
 -- Copyright (c) 2019 Evgeny Shulgin, MIT License
 -- =========================================
 
---[[
-local stringy = require("stringy")
-]]--
+-- Library includies
+local requests = require("requests")
 local inspect = require("inspect")
+
+-- Project module includies
 local emoji = require("emoji")
+local wolfram = require("wolfram")
 
 -- Load the API
 local token = os.getenv("TOKEN")
@@ -35,7 +37,7 @@ end
 print("The bot is running")
 api.send_message(
     owner,
-    "Hi, there is a lemon " .. emoji.emoji_unicode["lemon"]
+    "Hi, there is a banana " .. emoji.emoji_unicode["banana"]
 )
 
 api.run()

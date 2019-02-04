@@ -12,6 +12,7 @@ RUN \
 RUN luarocks install telegram-bot-lua
 RUN luarocks install inspect
 RUN luarocks install stringy
+RUN luarocks install lua-requests
 
 # Copy the code and set workdir
 ADD ./src /opt/src/
