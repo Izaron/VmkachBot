@@ -6,6 +6,7 @@
 -- Project module includies
 local emoji = require("emoji")
 local wolfram = require("wolfram")
+local weather = require("weather")
 
 local commands = {}
 local seed_set = false
@@ -58,5 +59,17 @@ end
 -- @param msg New message (table).
 --------------------------------------------
 commands.wf = commands.wolfram
+
+--------------------------------------------
+-- Sends message with description of current weather
+-- @param api Telegram API.
+-- @param msg New message (table).
+--------------------------------------------
+function commands.weather(api, msg)
+    api.send_message(
+        msg.chat.id,
+        weather.get_current_weather()
+    )
+end
 
 return { table = commands }

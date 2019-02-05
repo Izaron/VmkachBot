@@ -8,7 +8,7 @@ local requests = require("requests")
 local wolfram = {}
 
 local template = "http://api.wolframalpha.com/v1/simple"
-args = {
+local args = {
     ["appid"] = os.getenv("WOLFRAM_TOKEN"),
     ["background"] = 193555,
     ["foreground"] = "white",

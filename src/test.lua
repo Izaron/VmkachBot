@@ -10,6 +10,7 @@ local inspect = require("inspect")
 -- Project module includies
 local emoji = require("emoji")
 local wolfram = require("wolfram")
+local weather = require("weather")
 
 -- Local variables
 local owner = os.getenv("OWNER")
@@ -68,11 +69,24 @@ function test.test_wolfram(api)
     )
 end
 
+--------------------------------------------
+-- Tests weather.lua - sends a message about current weather
+-- @param api Telegram API object
+--------------------------------------------
+function test.test_weather(api)
+    api.send_message(
+        owner,
+        weather.get_current_weather()
+    )
+end
+
+
 function test.test_all(api)
     print("Run all test")
     test.test_send_message(api)
     test.test_emoji(api)
     test.test_wolfram(api)
+    test.test_weather(api)
     print("Tests done!")
 end
 

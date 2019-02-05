@@ -13,6 +13,7 @@ RUN luarocks install telegram-bot-lua
 RUN luarocks install inspect
 RUN luarocks install stringy
 RUN luarocks install lua-requests
+RUN luarocks install lua-cjson
 
 # Copy the code and set workdir
 ADD ./src /opt/src/
