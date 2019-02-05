@@ -8,12 +8,13 @@ local requests = require("requests")
 local inspect = require("inspect")
 
 -- Project module includies
+local test = require("test")
 local emoji = require("emoji")
 local wolfram = require("wolfram")
 local commands = require("commands")
 
 -- Load the API
-local token = os.getenv("TOKEN")
+local token = os.getenv("TG_TOKEN")
 local owner = os.getenv("OWNER")
 local api = require("telegram-bot-lua.core").configure(token)
 
@@ -46,17 +47,5 @@ function api.on_message(msg)
     end
 end
 
---------------------------------------------
--- This function is called before the main loop
---------------------------------------------
-function on_start()
-    print("The bot is running")
-    api.send_message(
-        owner,
-        "Hi, there is a banana " .. emoji.emoji_unicode["banana"]
-    )
-end
-
-
-on_start()
+test.test_all(api)
 api.run()
