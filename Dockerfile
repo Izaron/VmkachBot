@@ -19,4 +19,4 @@ ADD ./src /opt/src/
 WORKDIR /opt/src
 
 # Run the app. CMD is required to run on Heroku
-CMD lua5.1 bot.lua
+CMD lua5.1 main.lua
